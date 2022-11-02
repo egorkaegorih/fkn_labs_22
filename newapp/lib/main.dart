@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'hero_screen.dart';
 import 'heroes.dart';
 import 'heroes_card.dart';
 
@@ -59,7 +60,13 @@ class StateHeroesApp extends State<MarvelHeroesApp> {
                             colorTriangle = marvelHeroes[IndexMainHero].color;
                           }),
                           itemBuilder: (BuildContext context, int index) {
-                            return HeroesCard(marvelHeroes[index]);
+                            return GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          HeroScreen(marvelHeroes[index])));
+                                },
+                                child: HeroesCard(marvelHeroes[index]));
                           },
                         ),
                       ),
