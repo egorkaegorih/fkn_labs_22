@@ -1,6 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:newapp/heroes.dart';
-import 'package:newapp/main.dart';
+import 'heroes.dart';
 
 class HeroesCard extends StatelessWidget {
   final Heroes _heroes;
@@ -9,27 +9,32 @@ class HeroesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        semanticContainer: true,
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        margin: const EdgeInsets.all(15),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(_heroes.pathImage), fit: BoxFit.fitHeight),
-            ),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Expanded(
-                child: Container(),
+    return Hero(
+        tag: _heroes.name,
+        child: Card(
+            semanticContainer: true,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            margin: const EdgeInsets.all(15),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Stack(fit: StackFit.expand, children: [
+              CachedNetworkImage(
+                imageUrl: _heroes.pathImage,
+                fit: BoxFit.cover,
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(
+                  Icons.error,
+                  color: Colors.red,
+                ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 40),
+              Positioned(
+                bottom: 10,
+                left: 10,
                 child: Text(
                     style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 30,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold),
                     _heroes.name),
               )
