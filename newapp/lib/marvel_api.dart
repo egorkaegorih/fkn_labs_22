@@ -20,7 +20,6 @@ class MarvelApi {
 
       for (var dataHero in response.data["data"]["results"]) {
         idHeroes.add(dataHero["id"]);
-        print(dataHero["id"]);
       }
 
       return idHeroes;

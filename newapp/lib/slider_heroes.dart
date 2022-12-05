@@ -37,8 +37,8 @@ class SliderHeroes extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return HeroesCard(listHeroes.data![index]);
                 });
-          } else if (listHeroes.hasError) {
-            print(listHeroes.error.toString());
+          }
+          if (listHeroes.hasError) {
             return Padding(
                 padding: const EdgeInsets.all(10),
                 child: Center(

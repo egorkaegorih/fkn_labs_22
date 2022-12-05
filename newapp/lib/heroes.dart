@@ -6,13 +6,13 @@ class Heroes {
   Heroes({required this.name, required this.info, required this.pathImage});
 
   factory Heroes.fromJson(Map<String, dynamic> response) {
-    var urlImg = response['thumbnail']['path'] +
+    String urlImg = response['thumbnail']['path'] +
         "." +
         response['thumbnail']['extension'];
 
     return Heroes(
-      name: response['name'] as String,
-      info: response['description'] as String,
+      name: response['name'].toString(),
+      info: response['description'].toString(),
       pathImage: urlImg,
     );
   }

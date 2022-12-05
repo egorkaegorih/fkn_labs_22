@@ -4,7 +4,7 @@ import 'package:palette_generator/palette_generator.dart';
 class ProviderBackgroundColor extends ChangeNotifier {
   Color _activColor = Colors.green;
 
-  get activColor => _activColor;
+  Color get activColor => _activColor;
 
   void setActivColor(String pathImage) async {
     Future<PaletteGenerator> pallet = PaletteGenerator.fromImageProvider(

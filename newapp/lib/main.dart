@@ -22,37 +22,35 @@ class StateHeroesApp extends State<MarvelHeroesApp> {
     return MaterialApp(
         home: Scaffold(
             backgroundColor: const Color.fromARGB(255, 42, 38, 43),
-            body: MultiProvider(
-                providers: [
-                  ChangeNotifierProvider<ProviderBackgroundColor>(
-                      create: (context) => ProviderBackgroundColor())
+            body: ChangeNotifierProvider<ProviderBackgroundColor>(
+              create: (context) => ProviderBackgroundColor(),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  BackgroundTriangle(),
+                  Container(
+                      alignment: Alignment.topCenter,
+                      padding: const EdgeInsets.symmetric(vertical: 25),
+                      child: Column(children: [
+                        Image.asset(
+                          "assets/marvel_logo.png",
+                          height: 50,                          
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 30, bottom: 15),
+                          child: Text(
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                              "Choose your hero"),
+                        ),
+                        Expanded(
+                          child: SliderHeroes(),
+                        ),
+                      ]))
                 ],
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    BackgroundTriangle(),
-                    Container(
-                        alignment: Alignment.topCenter,
-                        padding: const EdgeInsets.symmetric(vertical: 25),
-                        child: Column(children: [
-                          Image.asset(
-                            "assets/marvel_logo.png",
-                            height: 50,                      
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 30, bottom: 15),
-                            child: Text(
-                                style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                                "Choose your hero"),
-                          ),
-                          Expanded(
-                            child: SliderHeroes(),
-                          ),
-                        ]))
-                  ],
-                ))));
+              ),
+            )));
   }
 }
